@@ -1,19 +1,25 @@
-<form action='/spaces' method='post'>
-	<label for='title'>
-		Title:
-		<input type='text' name='title'>
-	</label>
-	<label for='location'>
-		Location:
-		<input type='text' name='location'>
-	</label>
-	<label for='description'>
-		Description:
-		<input type='text' name='description'>
-	</label>
-	<label for='price'>
-		Price:
-		<input type='text' name='price'>
-	</label>
-	<input type='submit' value='Create'>
-</form>
+<!-- <% if current_user %> -->
+	<form action='/spaces' method='post'>
+		<label for='title'>
+			Title:
+			<input type='text' name='title'>
+		</label>
+		<label for='location'>
+			Location:
+			<input type='text' name='location'>
+		</label>
+		<label for='description'>
+			Description:
+			<input type='text' name='description'>
+		</label>
+		<label for='price'>
+			Price:
+			<input type='text' name='price'>
+		</label>
+		<input type='submit' value='Create'>
+	</form>
+
+<!-- <% else %> -->
+	"Please log in first"
+
+<!-- <% end %>-->

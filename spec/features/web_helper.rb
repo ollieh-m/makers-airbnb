@@ -34,3 +34,16 @@ def sign_in(email:, password:)
   fill_in :password, with: password
   click_button 'Sign in'
 end
+
+def sign_up_and_in
+  visit '/sign_up'
+  fill_in :name, with: 'Lexi'
+  fill_in :email, with: 'hazukitran@gmail.com'
+  fill_in :password, with: 'hello'
+  fill_in :password_confirmation, with: 'hello'
+  click_button 'Sign up'
+  visit '/sessions/new'
+  fill_in :email, with: 'hazukitran@gmail.com'
+  fill_in :password, with: 'hello'
+  click_button 'Sign in'
+end
