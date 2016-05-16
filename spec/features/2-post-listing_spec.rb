@@ -16,7 +16,7 @@ feature "User posts listing" do
 		fill_in('description', with: 'Example description')
 		fill_in('price', with: '20')
 		click_button('Create')
-		visit('/spaces')
+		visit('/')
 		expect(page).to have_content("Example title")
 	end
 

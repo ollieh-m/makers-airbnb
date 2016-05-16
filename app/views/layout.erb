@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Makers AirBnB</title>
+	</head>
+	<body>
+		<h1>Makers AirBnB</h1>
+			<% if flash[:errors] && !flash[:errors].empty? %>
+    		<div id="flash" class="alert alert-danger">
+        	<ul id="error" >
+            <% flash[:errors].each do |error| %>
+            <li><%= error %></li>
+            <% end %>
+           </ul>
+        </div>
+    	<% end %>
+		<% if flash[:notice] %>
+    	<div id="notice" class="alert alert-success">
+        <%= flash[:notice] %>
+    	</div>
+		<% end %>
+    	<% if current_user %>
+      	<form id="signout" action="/sessions" method="post">
+			  <input type="hidden" name="_method" value="delete">
+	        <button type="submit" class="btn btn-primary">Sign out</button>
+       	</form>
+    	<% end %>
+			<% if current_user %>
+				<h1 style="text-align: center;">Welcome, <%= current_user.name %></h1>
+			<% end %>
+		<%= yield %>
+	</body>
+</html>
