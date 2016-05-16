@@ -28,7 +28,7 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/sign_up' do
-    erb :'users/sign_up'
+    erb :'users/new'
   end
 
   post '/users' do
@@ -42,7 +42,7 @@ class MakersBnB < Sinatra::Base
       flash.now[:errors] = user.errors.full_messages
       @name = params[:name]
       @email = params[:email]
-      erb :'users/sign_up'
+      erb :'users/new'
     end
   end
 
