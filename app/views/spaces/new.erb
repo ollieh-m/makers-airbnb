@@ -1,4 +1,4 @@
-<!-- <% if current_user %> -->
+<% if current_user %>
 	<form action='/spaces' method='post'>
 		<label for='title'>
 			Title:
@@ -18,8 +18,8 @@
 		</label>
 		<input type='submit' value='Create'>
 	</form>
-
-<!-- <% else %> -->
+<% else %>
 	"Please log in first"
+<% end %>
 
-<!-- <% end %>-->
+

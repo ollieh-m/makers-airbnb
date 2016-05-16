@@ -5,6 +5,7 @@ feature "only logged in users can post spaces" do
   scenario "creating a space as a logged in user" do
     sign_up_and_in
     visit('/spaces/new')
+    expect(page).not_to have_content("Please log in first")
     fill_in('title', with: 'Example title')
     fill_in('location', with: 'Example location')
     fill_in('description', with: 'Example description')
