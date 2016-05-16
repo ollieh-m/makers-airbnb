@@ -8,7 +8,7 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces' do
     @spaces = Space.all
-    erb :spaces
+    erb :'spaces/spaces'
   end
 
   get '/spaces/new' do
