@@ -8,7 +8,15 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces' do
     @spaces = Space.all
-    erb :spaces
+    erb :'spaces/spaces'
+  end
+
+  get '/spaces/new' do
+  	erb :'spaces/new'
+  end
+
+  post '/spaces' do
+  	Space.create(params)
   end
 
   # start the server if ruby file executed directly
