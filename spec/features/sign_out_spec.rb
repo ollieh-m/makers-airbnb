@@ -1,4 +1,6 @@
-feature 'Sign out' do 
+require 'spec_helper'
+
+feature 'Sign out' do
   before do
     User.create(name: 'Hello',
                 email: 'hello@example.com',

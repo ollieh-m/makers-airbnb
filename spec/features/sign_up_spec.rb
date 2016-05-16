@@ -1,5 +1,7 @@
+require 'spec_helper'
+
 feature 'Sign up' do
-  
+
   scenario "User can sign up for an account" do
     expect { sign_up_correctly }.to change(User, :count).by(1)
     expect(page).to have_content "Welcome, Lexi"
