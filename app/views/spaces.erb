@@ -1,0 +1,10 @@
+<div id='spaces'>
+  <% @spaces.each do |space| %>
+    <div class ='space'>
+      <P class ='title'><%= space.title %></p>
+      <p class ='location'><%= space.location %></p>
+      <P class ='description'>- <%= space.description %></p>
+      <P class ='price_per_night'>- <%= space.price_per_night %></p>
+    </div>
+  <% end %>
+</div>
