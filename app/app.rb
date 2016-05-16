@@ -1,10 +1,14 @@
 ENV['RACK_ENV'] ||= 'development'
 
+
 require 'sinatra/base'
+require_relative 'data_mapper_setup'
 
 class MakersBnB < Sinatra::Base
-  get '/' do
-    'Hello MakersBnB!'
+
+  get '/spaces' do
+    @spaces = Space.all
+    erb :spaces
   end
 
   # start the server if ruby file executed directly
