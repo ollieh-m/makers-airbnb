@@ -11,6 +11,14 @@ class MakersBnB < Sinatra::Base
     erb :spaces
   end
 
+  get '/spaces/new' do
+  	erb :'spaces/new'
+  end
+
+  post '/spaces' do
+  	Space.create(params)
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
