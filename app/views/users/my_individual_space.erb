@@ -4,3 +4,10 @@
 	Choose a Date <input type="date" name="available_date">
 	<input type="submit" value="Submit">
 </form>
+
+<h1>Current available dates</h1>
+<% @space.available_dates.each do |available_date| %>
+	<div class ='space'>
+		<P class ='date'><%= available_date.date.strftime("%d-%b-%Y") %></p>
+	</div>
+<% end %>
