@@ -1,0 +1,9 @@
+<% @spaces.each do |space| %>
+	<% unless space.booking_requests.empty? %>
+		<p><%= space.title %>, <%= space.location %></p>
+		<% space.booking_requests.each do |booking_request| %>
+			<%= booking_request.user.name %>
+			<%= booking_request.formatted_date %>
+		<% end %>
+	<% end %>
+<% end %>
