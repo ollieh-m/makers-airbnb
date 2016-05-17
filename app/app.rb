@@ -55,7 +55,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/bookings/:space_id' do
-    BookingRequest.create(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
+    req = BookingRequest.create(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
     redirect '/'
   end
 
