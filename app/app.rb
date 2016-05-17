@@ -44,7 +44,7 @@ class MakersBnB < Sinatra::Base
     erb :'spaces/new'
   end
 
-  get '/sign_up' do
+  get '/users/new' do
     erb :'users/new'
   end
 

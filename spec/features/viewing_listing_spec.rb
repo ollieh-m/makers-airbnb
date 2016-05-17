@@ -1,5 +1,3 @@
-require "spec_helper"
-
 feature "viewing spaces" do
 
   before do

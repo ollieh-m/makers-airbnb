@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Viewing individual spaces' do
 
   scenario "Can click on one space and get details of only this space" do

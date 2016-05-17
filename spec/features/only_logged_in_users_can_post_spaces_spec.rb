@@ -1,5 +1,3 @@
-require "spec_helper"
-
 feature "only logged in users can post spaces" do
 
   scenario "creating a space as a logged in user" do
