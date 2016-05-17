@@ -32,7 +32,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces' do
-  	Space.create(params)
+  	current_user.spaces.create(params)
   end
 
   get '/sign_up' do

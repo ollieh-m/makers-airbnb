@@ -14,6 +14,9 @@ class User
                                 format: :email_address
   property :password_digest,    Text
 
+  has n, :spaces
+  has n, :booking_requests
+
   attr_reader :password
   attr_accessor :password_confirmation
 
