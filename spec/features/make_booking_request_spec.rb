@@ -14,7 +14,6 @@ feature "a user can make a booking request" do
     expect(BookingRequest.all.length).to eq(1)
     expect(BookingRequest.all.first.user.name).to eq('Lexi')
     expect(BookingRequest.all.first.space.title).to eq('Example Title')
-    #change(@space.booking_requests.length).by(1)
   end
 
 end
