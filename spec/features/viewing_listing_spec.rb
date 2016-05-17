@@ -1,5 +1,3 @@
-require "spec_helper"
-
 feature "viewing spaces" do
 
   scenario "viewing spaces on website without being logged in" do

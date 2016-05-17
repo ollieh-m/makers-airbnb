@@ -1,5 +1,5 @@
 def sign_up_correctly
-  visit '/sign_up'
+  visit '/users/new'
   fill_in :name, with: 'Lexi'
   fill_in :email, with: 'hazukitran@gmail.com'
   fill_in :password, with: 'hello'
@@ -8,7 +8,7 @@ def sign_up_correctly
 end
 
 def sign_up_incorrectly
-  visit '/sign_up'
+  visit '/users/new'
   fill_in :name, with: 'Lexi'
   fill_in :email, with: 'hazukitran@gmail.com'
   fill_in :password, with: 'hello'
@@ -17,13 +17,13 @@ def sign_up_incorrectly
 end
 
 def sign_up_without_email
-  visit '/sign_up'
+  visit '/users/new'
   fill_in :email, with: ""
   click_button 'Sign up'
 end
 
 def sign_up_invalid_email
-  visit '/sign_up'
+  visit '/users/new'
   fill_in :email, with: "dhfgo.@com"
   click_button 'Sign up'
 end
@@ -36,7 +36,7 @@ def sign_in(email:, password:)
 end
 
 def sign_up_and_in
-  visit '/sign_up'
+  visit '/users/new'
   fill_in :name, with: 'Lexi'
   fill_in :email, with: 'hazukitran@gmail.com'
   fill_in :password, with: 'hello'
