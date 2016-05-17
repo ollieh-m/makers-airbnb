@@ -18,4 +18,19 @@ feature "Approving bookings" do
 		expect(page).not_to have_content('Example 2')
 	end
 
+	scenario "A user can approve a booking request" do
+		visit '/bookings/received'
+		within '#1' do
+			expect(page).to have_button('Confirm')
+		end
+		click_button 'Confirm'
+		within '#1' do
+			expect(page).to have_content('Confirmed')
+		end
+		expect(BookingRequest.first(status: 'Confirmed')).not_to be_nil
+		within '#1' do
+			expect(page).not_to have_button('Confirm')
+		end
+	end
+
 end
