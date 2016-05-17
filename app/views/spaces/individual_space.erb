@@ -3,4 +3,8 @@
       <p class ='location'><%= @space.location %></p>
       <P class ='description'><%= @space.description %></p>
       <P class ='price_per_night'><%= @space.price %></p>
+      <form action='/booking_request/<%= @space.id %>', method='post'>
+        Choose a Date <input type="date" name="date">
+        <input type="submit" value="Submit Booking">
+      </form>
 </div>
