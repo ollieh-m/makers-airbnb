@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Sign in' do
   let(:user) do
     User.create(name: 'Example',

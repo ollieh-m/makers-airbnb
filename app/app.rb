@@ -23,26 +23,40 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/' do
-    @spaces = Space.all
-    erb :'spaces/spaces'
+    if current_user
+      redirect '/spaces'
+    else
+      erb :'users/new'
+    end
   end
 
-  get '/spaces/new' do
-  	erb :'spaces/new'
+  get '/spaces' do
+    @spaces = Space.all
+    erb :'spaces/index'
   end
 
   post '/spaces' do
-  	Space.create(params)
+    Space.create(params)
+    redirect '/spaces'
   end
 
-  get '/sign_up' do
+  get '/spaces/new' do
+    erb :'spaces/new'
+  end
+
+  get '/users/new' do
     erb :'users/new'
+  end
+
+  get '/spaces/:id' do
+    @space = Space.get(params[:id])
+    erb :'spaces/individual_space'
   end
 
   post '/users' do
     user = User.create(name: params[:name],
-                      email: params[:email], password: params[:password],
-                      password_confirmation: params[:password_confirmation])
+    email: params[:email], password: params[:password],
+    password_confirmation: params[:password_confirmation])
     if user.save
       session[:user_id] = user.id
       redirect '/'

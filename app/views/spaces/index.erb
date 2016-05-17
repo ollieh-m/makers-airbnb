@@ -1,7 +1,10 @@
+<a href="/spaces/new">create a new space</a>
+
 <div id='spaces'>
   <% @spaces.each do |space| %>
-    <div class ='space'>
+    <div class ='space' >
       <P class ='title'><%= space.title %></p>
+      <a href="/spaces/<%= space.id %>">Book</a>
       <p class ='location'><%= space.location %></p>
       <P class ='description'>- <%= space.description %></p>
       <P class ='price_per_night'>- <%= space.price %></p>

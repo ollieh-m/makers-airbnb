@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'Sign up' do
 
   scenario "User can sign up for an account" do
