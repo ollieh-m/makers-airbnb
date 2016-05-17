@@ -66,9 +66,7 @@ class MakersBnB < Sinatra::Base
   post '/users/available_date/:space_id' do
     space  = Space.get(params[:id])
     available_date = AvailableDate.create(date: DateTime.parse(params[:available_date]))
-    space.available_dates << available_date
-    space.save
-    # SpaceAvailableDate.create(:space => space, :available_date => available_date)
+    AvailableDateSpace.create(:space => space, :available_date => available_date)
   end
 
   post '/bookings/:space_id' do
