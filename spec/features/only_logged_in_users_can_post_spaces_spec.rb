@@ -4,12 +4,9 @@ feature "only logged in users can post spaces" do
 
   scenario "creating a space as a logged in user" do
     sign_up_and_in
-    visit('/spaces/new')
+    click_link('create a new space')
     expect(page).not_to have_content("Please log in first")
-    fill_in('title', with: 'Example title')
-    fill_in('location', with: 'Example location')
-    fill_in('description', with: 'Example description')
-    fill_in('price', with: '20')
+    fill_in_create_space_form
     expect{click_button('Create')}.to change{Space.count}.by 1
   end
 
