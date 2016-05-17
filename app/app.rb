@@ -59,6 +59,16 @@ class MakersBnB < Sinatra::Base
     redirect '/'
   end
 
+  get '/bookings/received' do
+    @spaces = current_user.spaces
+    erb :'bookings/received'
+  end
+
+  post '/bookings/confirmation/:booking_id' do
+    BookingRequest.first(id: params[:booking_id]).update(status:'Confirmed')
+    redirect 'bookings/received'
+  end
+
   post '/users' do
     user = User.create(name: params[:name],
     email: params[:email], password: params[:password],
