@@ -69,6 +69,11 @@ class MakersBnB < Sinatra::Base
     redirect 'bookings/received'
   end
 
+  post '/bookings/rejection/:booking_id' do
+    BookingRequest.first(id: params[:booking_id]).update(status: 'Rejected')
+    redirect 'bookings/received'
+  end
+
   post '/users' do
     user = User.create(name: params[:name],
     email: params[:email], password: params[:password],
