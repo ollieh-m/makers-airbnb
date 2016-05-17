@@ -3,7 +3,7 @@ class AvailableDate
   include DataMapper::Resource
 
   property :id,   Serial
-  property :data, DateTime, required: true
+  property :date, DateTime, required: true
 
   has n, :spaces, through: Resource
   

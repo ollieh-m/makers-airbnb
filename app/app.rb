@@ -54,6 +54,23 @@ class MakersBnB < Sinatra::Base
     erb :'spaces/individual_space'
   end
 
+  get '/users/spaces' do
+    erb :'users/my_spaces'
+  end
+
+  get '/users/spaces/:id' do
+    @space = Space.get(params[:id])
+    erb :'users/my_individual_space'
+  end
+
+  post '/users/available_date/:space_id' do
+    space  = Space.get(params[:id])
+    available_date = AvailableDate.create(date: DateTime.parse(params[:available_date]))
+    space.available_dates << available_date
+    space.save
+    # SpaceAvailableDate.create(:space => space, :available_date => available_date)
+  end
+
   post '/bookings/:space_id' do
     req = BookingRequest.create(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
     redirect '/'
