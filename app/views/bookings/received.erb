@@ -10,6 +10,9 @@
             <form action='/bookings/confirmation/<%= booking_request.id%>' method='post'>
               <input type='submit' value='Confirm'>
             </form>
+            <form action='/bookings/rejection/<%= booking_request.id%>' method='post'>
+              <input type='submit' value='Reject'>
+            </form>
           <% end %>
         </article>
   		<% end %>
