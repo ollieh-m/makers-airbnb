@@ -32,7 +32,9 @@ feature "available dates" do
     click_button 'Submit'
     click_link("Manage space")
     fill_in :available_date, with: '2016-06-01'
-    expect(page).to have_content('This date is already available')
+    click_button 'Submit'
+    expect(AvailableDateSpace.all.size).to eq(1)
+    expect(page).to have_content('That date is already available')
   end
 
 

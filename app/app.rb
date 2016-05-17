@@ -64,11 +64,16 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/users/available_date/:space_id' do
-    available_date = AvailableDate.create(date: DateTime.parse(params[:available_date]))
+    available_date = AvailableDate.first_or_create(date: DateTime.parse(params[:available_date]))
     space  = Space.get(params[:space_id])
-    available_date.spaces << space
-    available_date.save
-    redirect '/users/spaces'
+    if available_date.spaces.include?(space)
+      flash.next[:errors] = ['That date is already available']
+      redirect "/users/spaces/#{params[:space_id]}"
+    else
+      available_date.spaces << space
+      available_date.save
+      redirect '/users/spaces'
+    end
   end
 
 
