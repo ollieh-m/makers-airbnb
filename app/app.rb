@@ -5,6 +5,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require_relative 'data_mapper_setup'
+require 'time'
 
 class MakersBnB < Sinatra::Base
   use Rack::MethodOverride
@@ -51,6 +52,14 @@ class MakersBnB < Sinatra::Base
   get '/spaces/:id' do
     @space = Space.get(params[:id])
     erb :'spaces/individual_space'
+  end
+
+  post '/booking_request/:space_id' do
+    req = BookingRequest.create(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
+    #req.space = Space.first(id: params[:space_id])
+    # bookingrequest = BookingRequest.create(date: params[:date])
+    # current_user.booking_requests << bookingrequest
+    # Space.first(id: params[:space_id]) << bookingrequest
   end
 
   post '/users' do
