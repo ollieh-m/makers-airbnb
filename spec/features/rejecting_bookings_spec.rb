@@ -3,8 +3,14 @@ feature "Rejecting bookings" do
 	before do
 		sign_up
 		create_space
-		create_space(title: 'Example 2')
+		add_available_date
 		sign_out
+
+		sign_up(name: 'Fluff', email: 'fluff@test.com')
+		create_space(title: 'Example 2')
+		add_available_date
+		sign_out
+
 		sign_up(name: 'Ollie', email: 'ollie@test.com')
 		make_booking_request
 		sign_out
