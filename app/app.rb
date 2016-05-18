@@ -78,9 +78,15 @@ class MakersBnB < Sinatra::Base
 
 
   post '/bookings/:space_id' do
-    req = BookingRequest.create(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
+    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
+    if req.user.email == req.space.user.email
+      flash.next[:errors] = ['You cannot book your own space!']
+    else
+      req.save
+    end
     redirect '/'
   end
+  #ideally we want to validate in the models but boy did shit hit the fan when we attempted that
 
   get '/bookings/received' do
     @spaces = current_user.spaces

@@ -9,9 +9,8 @@ class BookingRequest
   belongs_to :user
   belongs_to :space
 
-
 	def formatted_date
 		date.strftime("%Y-%m-%d")
 	end
-  
+
 end
