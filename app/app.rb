@@ -70,39 +70,41 @@ class MakersBnB < Sinatra::Base
       redirect "/users/spaces/#{params[:space_id]}"
     else
 
-    start_day = DateTime.parse(params[:available_date_start])
-    finish_day = DateTime.parse(params[:available_date_finish])
+      start_day = DateTime.parse(params[:available_date_start])
+      finish_day = DateTime.parse(params[:available_date_finish])
 
-    if start_day > finish_day
-      flash.next[:errors] = ['Start date must be before end date']
-      redirect "/users/spaces/#{params[:space_id]}"
-    elsif DateTime.now > start_day
-      flash.next[:errors] = ['That ship has sailed']
-      redirect "/users/spaces/#{params[:space_id]}"
-    else
+      if start_day > finish_day
+        flash.next[:errors] = ['Start date must be before end date']
+        redirect "/users/spaces/#{params[:space_id]}"
+      elsif DateTime.now > start_day
+        flash.next[:errors] = ['That ship has sailed']
+        redirect "/users/spaces/#{params[:space_id]}"
+      else
 
-      days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
-      space  = Space.get(params[:space_id])
+        days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
+        space  = Space.get(params[:space_id])
 
-      days.each do |available_day|
-        available_date = AvailableDate.first_or_create(date: available_day)
-        unless available_date.spaces.include?(space)
-          available_date.spaces << space
-          available_date.save
+        days.each do |available_day|
+          available_date = AvailableDate.first_or_create(date: available_day)
+          unless available_date.spaces.include?(space)
+            available_date.spaces << space
+            available_date.save
+          end
         end
+        redirect "/users/spaces/#{params[:space_id]}"
       end
-      redirect "/users/spaces/#{params[:space_id]}"
     end
   end
-end
   post '/bookings/:space_id' do
     req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
-    if req.user.email == req.space.user.email
-      flash.next[:errors] = ['You cannot book your own space!']
-      redirect '/'
-    elsif !req.space.available_dates.find_index {|a_date|a_date.date == req.date}
-      flash.next[:errors] = ['The space is not available on that date!']
+    boolean = !req.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y")  == req.date.strftime("%m/%d/%Y")}
+
+    if boolean
+      flash.next[:errors] = ['The space is not available on that date']
       redirect "/spaces/#{params[:space_id]}"
+    elsif (req.user.email == req.space.user.email)
+      flash.next[:errors] = ['You cannot book your own space']
+      redirect '/'
     else
       req.save
       redirect '/'

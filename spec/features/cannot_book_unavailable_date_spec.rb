@@ -10,7 +10,7 @@ feature 'user cannot book a date that is not available' do
 
   scenario 'renter should be able to see available dates in space detail page' do
     make_booking_request
-    expect(page).to have_content('The space is not available on that date!')
+    expect(page).to have_content('The space is not available on that date')
     expect(Space.get(1).booking_requests).to be_empty
   end
 

@@ -10,7 +10,7 @@ feature 'renter can see available dates' do
   end
 
   scenario 'renter should be able to see available dates in space detail page' do
-    expect(page).to have_content('01-Jun-2016')
+    expect(page).to have_content('01-Dec-2016')
   end
 
 end
