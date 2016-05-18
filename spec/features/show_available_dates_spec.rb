@@ -6,20 +6,12 @@ feature "available dates" do
   end
 
   scenario "can add available dates" do
-    visit "/spaces"
-    click_link("My spaces")
-    click_link("Manage space")
-    fill_in :available_date, with: '2016-06-01'
-    click_button 'Submit'
+    add_available_date
     expect(AvailableDate.all.size).to eq(1)
   end
 
   scenario "owner can view available dates" do
-    visit "/spaces"
-    click_link("My spaces")
-    click_link("Manage space")
-    fill_in :available_date, with: '2016-06-01'
-    click_button 'Submit'
+    add_available_date
     click_link("Manage space")
     expect(page).to have_content('01-Jun-2016')
   end

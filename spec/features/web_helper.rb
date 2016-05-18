@@ -96,3 +96,11 @@ def create_wrong_space
   fill_in('price', with: '20')
   click_button 'Create'
 end
+
+def add_available_date
+  visit "/spaces"
+  click_link("My spaces")
+  click_link("Manage space")
+  fill_in :available_date, with: '2016-06-01'
+  click_button 'Submit'
+end
