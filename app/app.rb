@@ -6,6 +6,7 @@ require 'sinatra/flash'
 require 'sinatra/partial'
 require_relative 'data_mapper_setup'
 require 'time'
+require 'date'
 
 class MakersBnB < Sinatra::Base
   use Rack::MethodOverride
@@ -64,19 +65,36 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/users/available_date/:space_id' do
-    available_date = AvailableDate.first_or_create(date: DateTime.parse(params[:available_date]))
-    space  = Space.get(params[:space_id])
-    if available_date.spaces.include?(space)
-      flash.next[:errors] = ['That date is already available']
+    if params[:available_date_start] == "" || params[:available_date_finish] == ""
+      flash.next[:errors] = ['Please select both start and finish dates']
       redirect "/users/spaces/#{params[:space_id]}"
     else
-      available_date.spaces << space
-      available_date.save
-      redirect '/users/spaces'
+
+    start_day = DateTime.parse(params[:available_date_start])
+    finish_day = DateTime.parse(params[:available_date_finish])
+
+    if start_day > finish_day
+      flash.next[:errors] = ['Start date must be before end date']
+      redirect "/users/spaces/#{params[:space_id]}"
+    elsif DateTime.now > start_day
+      flash.next[:errors] = ['That ship has sailed']
+      redirect "/users/spaces/#{params[:space_id]}"
+    else
+
+      days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
+      space  = Space.get(params[:space_id])
+
+      days.each do |available_day|
+        available_date = AvailableDate.first_or_create(date: available_day)
+        unless available_date.spaces.include?(space)
+          available_date.spaces << space
+          available_date.save
+        end
+      end
+      redirect "/users/spaces/#{params[:space_id]}"
     end
   end
-
-
+end
   post '/bookings/:space_id' do
     req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
     if req.user.email == req.space.user.email

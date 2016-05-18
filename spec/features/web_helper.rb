@@ -101,6 +101,7 @@ def add_available_date
   visit "/spaces"
   click_link("My spaces")
   click_link("Manage space")
-  fill_in :available_date, with: '2016-06-01'
+  fill_in :available_date_start, with: '2016-06-01'
+  fill_in :available_date_finish, with: '2016-06-03'
   click_button 'Submit'
 end
