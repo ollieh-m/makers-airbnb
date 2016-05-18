@@ -4,6 +4,10 @@ feature "Approving bookings" do
 		sign_up
 		create_space
 		create_space(title: 'Example 2')
+		click_link "My spaces"
+		click_link("Manage space", :href => '/users/spaces/1')
+		fill_in :available_date, with: '2016-06-01'
+		click_button "Submit"
 		sign_out
 		sign_up(name: 'Ollie', email: 'ollie@test.com')
 		make_booking_request
@@ -31,6 +35,20 @@ feature "Approving bookings" do
 		within '#1' do
 			expect(page).not_to have_button('Confirm')
 		end
+	end
+
+	scenario "after booking confirmed, date is not available" do
+		space = Space.get(1)
+		visit 'bookings/received'
+		expect { click_button "Confirm" }.to change { space.available_dates.count }.by(-1)
+	end
+
+	scenario "removes date from available dates" do
+		space = Space.get(1)
+		available_date = space.available_dates.first
+		visit 'bookings/received'
+		click_button "Confirm"
+		expect(space.available_dates).not_to include available_date
 	end
 
 end
