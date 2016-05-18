@@ -99,10 +99,14 @@ end
     req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
     if req.user.email == req.space.user.email
       flash.next[:errors] = ['You cannot book your own space!']
+      redirect '/'
+    elsif !req.space.available_dates.find_index {|a_date|a_date.date == req.date}
+      flash.next[:errors] = ['The space is not available on that date!']
+      redirect "/spaces/#{params[:space_id]}"
     else
       req.save
+      redirect '/'
     end
-    redirect '/'
   end
   #ideally we want to validate in the models but boy did shit hit the fan when we attempted that
 
