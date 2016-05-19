@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/spaces">MakersBnB</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<% if current_user %>
+			<li><a href='/requests'>Requests</a></li>
+			<li><a href='/spaces/mine'>Manage spaces</a></li>
+			<li><a href='/spaces/new'>Create listing</a></li>
+			<form class="navbar-brand pull-right" id="signout" action="/sessions" method="post">
+				<input type="hidden" name="_method" value="delete">
+				<button type="submit" class="btn btn-sm">Sign out</button>
+			</form>
+			<% else %>
+			<li><a href='/users/new'>Sign up</a></li>
+			<li><a href='/sessions/new'>Sign in</a></li>
+			<% end %> 	
+			<li><a href='/spaces'>Spaces</a></li>
+		</ul>
+	</div>
+</nav>

@@ -1,11 +1,16 @@
-<div id='spaces'>
-  <% current_user.spaces.each do |space| %>
-    <div class ='space' >
-      <p class ='title'><%= space.title %></p>
-      <a href="/spaces/mine/<%= space.id %>">Manage space</a>
-      <p class ='location'><%= space.location %></p>
-      <p class ='description'>- <%= space.description %></p>
-      <p class ='price_per_night'>- <%= space.price %></p>
-    </div>
-  <% end %>
+<div class="row">
+	<h2>My spaces</h2>
+		<div class='list-group'>
+			<% current_user.spaces.each do |space| %>
+				<a href='/spaces/mine/<%= space.id %>' class='list-group-item clearfix'> 
+					<span class="pull-left">
+       			<span class="glyphicon glyphicon-home"></span>
+       		</span>
+					<h4 class='list-group-item-heading'>&nbsp;<%= space.title %></h4>
+					<span class="pull-right">
+       			<span class="glyphicon glyphicon-edit"></span>
+       		</span>
+				</a>
+			<% end %>
+		</div>
 </div>
