@@ -23,6 +23,13 @@ class MakersBnB < Sinatra::Base
       @current_user ||= User.get(session[:user_id])
     end
 
+    def validate_date_not_empty(*dates)
+      if dates.any? {|date| date.empty?}
+        flash.next[:errors] = ['Please put in both the start and end date.']
+        redirect "/spaces/mine/#{params[:id]}"
+      end
+    end
+
     def validate_date(start,finish)
       if start > finish
         flash.next[:errors] = ['Start date must be before end date']
@@ -70,6 +77,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/mine/:id/available_date' do
+    validate_date_not_empty(params[:available_date_start],params[:available_date_finish])
     start_day = DateTime.parse(params[:available_date_start])
     finish_day = DateTime.parse(params[:available_date_finish])
     validate_date(start_day,finish_day)
