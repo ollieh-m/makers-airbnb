@@ -22,8 +22,8 @@
 	<ul class='list-group'>
 		<% @space.available_dates.each do |available_date| %>
 			<li class="list-group-item"><%= available_date.date.strftime("%d-%b-%Y") %></li>
+		<% end %>
 	</ul>
-	<% end %>
 
 	</div>
 </div>
