@@ -5,14 +5,10 @@ feature "Approving bookings" do
 		create_space
 		add_available_date
 		sign_out
-
 		sign_up(name: 'Fluff', email: 'fluff@test.com')
 		create_space(title: 'Example 2')
 		add_available_date
-		sign_out
-
-		sign_up(name: 'Ollie', email: 'ollie@test.com')
-		make_booking_request
+		make_booking_request(space_id: 1)
 		sign_out
 		sign_in
 	end
@@ -39,4 +35,20 @@ feature "Approving bookings" do
 		end
 	end
 
+	scenario "after booking confirmed, date is not available" do
+		space = Space.get(1)
+		visit 'bookings/received'
+		expect { click_button "Confirm" }.to change { space.available_dates.count }.by(-1)
+	end
+
+	scenario "removes date from available dates" do
+		space = Space.get(1)
+		available_date = space.available_dates.first
+		visit 'bookings/received'
+		click_button "Confirm"
+		space.reload
+		expect(space.available_dates).not_to include available_date
+	end
+
 end
+

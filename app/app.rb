@@ -119,6 +119,11 @@ class MakersBnB < Sinatra::Base
 
   post '/bookings/confirmation/:booking_id' do
     BookingRequest.first(id: params[:booking_id]).update(status:'Confirmed')
+    booking_request = BookingRequest.first(id: params[:booking_id])
+    available_date = AvailableDate.first(date: booking_request.date)
+    space = booking_request.space
+    link = AvailableDateSpace.get(space.id, available_date.id)
+    link.destroy
     redirect 'bookings/received'
   end
 
