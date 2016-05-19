@@ -10,7 +10,7 @@
     <% space.booking_requests.each do |booking_request| %>
 
 
-    <li class="list-group-item clearfix">
+    <li id="<%=booking_request.id%>" class="list-group-item clearfix">
       <p>Requested by: <%= booking_request.user.name %></p>
       <p>Requested on: <%= booking_request.formatted_date %></p>
       <p>Request status: <%= booking_request.status %></p>
