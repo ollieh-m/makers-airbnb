@@ -47,10 +47,6 @@ class MakersBnB < Sinatra::Base
       link.destroy
     end
 
-    def space_available?(request)
-      !request.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == request.date.strftime("%m/%d/%Y")}
-    end
-
     def add_available_days(days,space)
       days.each do |available_day|
         available_date = AvailableDate.first_or_create(date: available_day)
@@ -134,15 +130,15 @@ class MakersBnB < Sinatra::Base
 
   post '/requests/:space_id' do
     request = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.get(params[:space_id]))
-    # if space_available?(request)
     if request.space_unavailable?
       flash.next[:errors] = ['The space is not available on that date']
       redirect "/spaces/all/#{params[:space_id]}"
-    elsif (request.user.email == request.space.user.email)
-      flash.next[:errors] = ['You cannot book your own space']
-    else
-      request.save
     end
+    if request.self_booking?
+      flash.next[:errors] = ['You cannot book your own space']
+      redirect '/'
+    end
+    request.save
     redirect '/'
   end
 
