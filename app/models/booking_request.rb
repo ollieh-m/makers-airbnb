@@ -13,4 +13,12 @@ class BookingRequest
 		date.strftime("%Y-%m-%d")
 	end
 
+  def space_unavailable?
+    !self.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == self.date.strftime("%m/%d/%Y")}
+  end
+
+  def self_booking?
+    self.user.email == self.space.user.email
+  end
+
 end
