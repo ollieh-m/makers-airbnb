@@ -60,14 +60,8 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/mine/:id/available_date' do
-    if params[:available_date_start] == "" || params[:available_date_finish] == ""
-      flash.next[:errors] = ['Please select both start and finish dates']
-      redirect "/spaces/mine/#{params[:id]}"
-    end
-
     start_day = DateTime.parse(params[:available_date_start])
     finish_day = DateTime.parse(params[:available_date_finish])
-
     if start_day > finish_day
       flash.next[:errors] = ['Start date must be before end date']
       redirect "/spaces/mine/#{params[:id]}"
@@ -76,6 +70,7 @@ class MakersBnB < Sinatra::Base
       redirect "/spaces/mine/#{params[:id]}"
     end
 
+    #days is an array of DateTime objects that represents all available days.
     days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
     space  = Space.get(params[:id])
 

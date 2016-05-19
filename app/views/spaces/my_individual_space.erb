@@ -1,8 +1,8 @@
 <h1>Set available date</h1>
 
 <form action='/spaces/mine/<%= @space.id %>/available_date', method='post'>
-	Choose a starting date <input type="date" name="available_date_start">
-	Choose a finishing date <input type="date" name="available_date_finish">
+	Choose a starting date <input type="date" name="available_date_start" required>
+	Choose a finishing date <input type="date" name="available_date_finish" required>
 	<input type="submit" value="Submit">
 </form>
 
