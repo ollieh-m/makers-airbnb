@@ -1,0 +1,11 @@
+<div id='spaces'>
+  <% current_user.spaces.each do |space| %>
+    <div class ='space' >
+      <p class ='title'><%= space.title %></p>
+      <a href="/spaces/mine/<%= space.id %>">Manage space</a>
+      <p class ='location'><%= space.location %></p>
+      <p class ='description'>- <%= space.description %></p>
+      <p class ='price_per_night'>- <%= space.price %></p>
+    </div>
+  <% end %>
+</div>

@@ -50,24 +50,24 @@ class MakersBnB < Sinatra::Base
     erb :'users/new'
   end
 
-  get '/spaces/:id' do
+  get '/spaces/all/:id' do
     @space = Space.get(params[:id])
     erb :'spaces/individual_space'
   end
 
-  get '/users/spaces' do
-    erb :'users/my_spaces'
+  get '/spaces/mine' do
+    erb :'spaces/myspaces'
   end
 
-  get '/users/spaces/:space_id' do
+  get '/spaces/mine/:space_id' do
     @space = Space.get(params[:space_id])
-    erb :'users/my_individual_space'
+    erb :'spaces/my_individual_space'
   end
 
   post '/users/available_date/:space_id' do
     if params[:available_date_start] == "" || params[:available_date_finish] == ""
       flash.next[:errors] = ['Please select both start and finish dates']
-      redirect "/users/spaces/#{params[:space_id]}"
+      redirect "/spaces/mine/#{params[:space_id]}"
     else
 
       start_day = DateTime.parse(params[:available_date_start])
@@ -75,10 +75,10 @@ class MakersBnB < Sinatra::Base
 
       if start_day > finish_day
         flash.next[:errors] = ['Start date must be before end date']
-        redirect "/users/spaces/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:space_id]}"
       elsif DateTime.now > start_day
         flash.next[:errors] = ['That ship has sailed']
-        redirect "/users/spaces/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:space_id]}"
       else
 
         days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
@@ -91,7 +91,7 @@ class MakersBnB < Sinatra::Base
             available_date.save
           end
         end
-        redirect "/users/spaces/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:space_id]}"
       end
     end
   end
@@ -101,7 +101,7 @@ class MakersBnB < Sinatra::Base
 
     if boolean
       flash.next[:errors] = ['The space is not available on that date']
-      redirect "/spaces/#{params[:space_id]}"
+      redirect "/spaces/all/#{params[:space_id]}"
     elsif (req.user.email == req.space.user.email)
       flash.next[:errors] = ['You cannot book your own space']
       redirect '/'

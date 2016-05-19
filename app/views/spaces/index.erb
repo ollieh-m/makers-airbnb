@@ -1,4 +1,4 @@
-<a href="users/spaces">My spaces</a>
+<a href="/spaces/mine">My spaces</a>
 
 <a href="/spaces/new">create a new space</a>
 
@@ -6,7 +6,7 @@
   <% @spaces.each do |space| %>
     <div class ='space' >
       <P class ='title'><%= space.title %></p>
-      <a href="/spaces/<%= space.id %>">Details</a>
+      <a href="/spaces/all/<%= space.id %>">Details</a>
       <p class ='location'><%= space.location %></p>
       <P class ='description'>- <%= space.description %></p>
       <P class ='price_per_night'>- <%= space.price %></p>

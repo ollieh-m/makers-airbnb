@@ -13,7 +13,7 @@ end
 
 def make_booking_request(space_id: 1)
   visit "/spaces"
-  click_link("Details", :href => "/spaces/#{space_id}")
+  click_link("Details", :href => "/spaces/all/#{space_id}")
   fill_in :date, with: '2016-12-01'
   click_button 'Submit Booking'
 end

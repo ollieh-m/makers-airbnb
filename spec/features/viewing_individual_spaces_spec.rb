@@ -5,7 +5,7 @@ feature 'Viewing individual spaces' do
     create_space
     create_wrong_space
     expect(Space.all.count).to eq 2
-    click_link("Details", :href => '/spaces/1')
+    click_link("Details", :href => '/spaces/all/1')
     expect(page).to have_content ("Example Title")
     expect(page).not_to have_content ("Fail")
   end
