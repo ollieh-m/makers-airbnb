@@ -51,6 +51,12 @@ class MakersBnB < Sinatra::Base
       !request.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == request.date.strftime("%m/%d/%Y")}
     end
 
+    def add_available_days(days,space)
+      days.each do |available_day|
+        available_date = AvailableDate.first_or_create(date: available_day)
+        AvailableDateSpace.first_or_create(available_date: available_date, space: space)
+      end
+    end
   end
 
   get '/' do
@@ -94,10 +100,7 @@ class MakersBnB < Sinatra::Base
     validate_date_time(start_day,finish_day)
     days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
     space  = Space.get(params[:id])
-    days.each do |available_day|
-      available_date = AvailableDate.first_or_create(date: available_day)
-      AvailableDateSpace.first_or_create(available_date: available_date, space: space)
-    end
+    add_available_days(days,space)
     redirect "/spaces/mine/#{params[:id]}"
   end
 
