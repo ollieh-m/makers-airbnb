@@ -23,6 +23,16 @@ class MakersBnB < Sinatra::Base
       @current_user ||= User.get(session[:user_id])
     end
 
+    def validate_date(start,finish)
+      if start > finish
+        flash.next[:errors] = ['Start date must be before end date']
+        redirect "/spaces/mine/#{params[:id]}"
+      elsif DateTime.now > start
+        flash.next[:errors] = ['That ship has sailed']
+        redirect "/spaces/mine/#{params[:id]}"
+      end
+    end
+
   end
 
   get '/' do
@@ -62,15 +72,8 @@ class MakersBnB < Sinatra::Base
   post '/spaces/mine/:id/available_date' do
     start_day = DateTime.parse(params[:available_date_start])
     finish_day = DateTime.parse(params[:available_date_finish])
-    if start_day > finish_day
-      flash.next[:errors] = ['Start date must be before end date']
-      redirect "/spaces/mine/#{params[:id]}"
-    elsif DateTime.now > start_day
-      flash.next[:errors] = ['That ship has sailed']
-      redirect "/spaces/mine/#{params[:id]}"
-    end
+    validate_date(start_day,finish_day)
 
-    #days is an array of DateTime objects that represents all available days.
     days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
     space  = Space.get(params[:id])
 
