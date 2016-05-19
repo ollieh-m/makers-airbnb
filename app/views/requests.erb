@@ -7,10 +7,10 @@
   			 <%= booking_request.formatted_date %>
          <%= booking_request.status %>
           <% if booking_request.status == 'Pending' %>
-            <form action='/bookings/confirmation/<%= booking_request.id%>' method='post'>
+            <form action='/requests/confirmation/<%= booking_request.id%>' method='post'>
               <input type='submit' value='Confirm'>
             </form>
-            <form action='/bookings/rejection/<%= booking_request.id%>' method='post'>
+            <form action='/requests/rejection/<%= booking_request.id%>' method='post'>
               <input type='submit' value='Reject'>
             </form>
           <% end %>

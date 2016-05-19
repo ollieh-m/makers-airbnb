@@ -10,7 +10,7 @@
           </div>
         <% end %>
       </div>
-      <form action='/bookings/<%= @space.id %>', method='post'>
+      <form action='/requests/<%= @space.id %>', method='post'>
         Choose a Date <input type="date" name="date">
         <input type="submit" value="Submit Booking">
       </form>

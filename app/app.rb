@@ -28,6 +28,8 @@ class MakersBnB < Sinatra::Base
     redirect '/spaces'
   end
 
+  #SPACES
+
   get '/spaces' do
     @spaces = Space.all
     erb :'spaces/index'
@@ -37,33 +39,29 @@ class MakersBnB < Sinatra::Base
     current_user.spaces.create(params)
     redirect '/spaces'
   end
-
-  get '/spaces/new' do
-    erb :'spaces/new'
-  end
-
-  get '/users/new' do
-    erb :'users/new'
-  end
-
+  
   get '/spaces/all/:id' do
     @space = Space.get(params[:id])
     erb :'spaces/individual_space'
+  end
+
+  get '/spaces/new' do
+    erb :'spaces/new'
   end
 
   get '/spaces/mine' do
     erb :'spaces/myspaces'
   end
 
-  get '/spaces/mine/:space_id' do
-    @space = Space.get(params[:space_id])
+  get '/spaces/mine/:id' do
+    @space = Space.get(params[:id])
     erb :'spaces/my_individual_space'
   end
 
-  post '/users/available_date/:space_id' do
+  post '/spaces/mine/:id/available_date' do
     if params[:available_date_start] == "" || params[:available_date_finish] == ""
       flash.next[:errors] = ['Please select both start and finish dates']
-      redirect "/spaces/mine/#{params[:space_id]}"
+      redirect "/spaces/mine/#{params[:id]}"
     else
 
       start_day = DateTime.parse(params[:available_date_start])
@@ -71,14 +69,14 @@ class MakersBnB < Sinatra::Base
 
       if start_day > finish_day
         flash.next[:errors] = ['Start date must be before end date']
-        redirect "/spaces/mine/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:id]}"
       elsif DateTime.now > start_day
         flash.next[:errors] = ['That ship has sailed']
-        redirect "/spaces/mine/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:id]}"
       else
 
         days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
-        space  = Space.get(params[:space_id])
+        space  = Space.get(params[:id])
 
         days.each do |available_day|
           available_date = AvailableDate.first_or_create(date: available_day)
@@ -87,45 +85,15 @@ class MakersBnB < Sinatra::Base
             available_date.save
           end
         end
-        redirect "/spaces/mine/#{params[:space_id]}"
+        redirect "/spaces/mine/#{params[:id]}"
       end
     end
   end
-  post '/bookings/:space_id' do
-    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
-    boolean = !req.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y")  == req.date.strftime("%m/%d/%Y")}
 
-    if boolean
-      flash.next[:errors] = ['The space is not available on that date']
-      redirect "/spaces/all/#{params[:space_id]}"
-    elsif (req.user.email == req.space.user.email)
-      flash.next[:errors] = ['You cannot book your own space']
-      redirect '/'
-    else
-      req.save
-      redirect '/'
-    end
-  end
-  #ideally we want to validate in the models but boy did shit hit the fan when we attempted that
+  #USERS
 
-  get '/requests' do
-    @spaces = current_user.spaces
-    erb :'requests'
-  end
-
-  post '/bookings/confirmation/:booking_id' do
-    BookingRequest.first(id: params[:booking_id]).update(status:'Confirmed')
-    booking_request = BookingRequest.first(id: params[:booking_id])
-    available_date = AvailableDate.first(date: booking_request.date)
-    space = booking_request.space
-    link = AvailableDateSpace.get(space.id, available_date.id)
-    link.destroy
-    redirect '/requests'
-  end
-
-  post '/bookings/rejection/:booking_id' do
-    BookingRequest.first(id: params[:booking_id]).update(status: 'Rejected')
-    redirect '/requests'
+  get '/users/new' do
+    erb :'users/new'
   end
 
   post '/users' do
@@ -142,6 +110,46 @@ class MakersBnB < Sinatra::Base
       erb :'users/new'
     end
   end
+
+  #BOOKINGS
+
+  get '/requests' do
+    @spaces = current_user.spaces
+    erb :'requests'
+  end
+
+  post '/requests/:space_id' do
+    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
+    boolean = !req.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y")  == req.date.strftime("%m/%d/%Y")}
+
+    if boolean
+      flash.next[:errors] = ['The space is not available on that date']
+      redirect "/spaces/all/#{params[:space_id]}"
+    elsif (req.user.email == req.space.user.email)
+      flash.next[:errors] = ['You cannot book your own space']
+      redirect '/'
+    else
+      req.save
+      redirect '/'
+    end
+  end
+
+  post '/requests/confirmation/:booking_id' do
+    BookingRequest.first(id: params[:booking_id]).update(status:'Confirmed')
+    booking_request = BookingRequest.first(id: params[:booking_id])
+    available_date = AvailableDate.first(date: booking_request.date)
+    space = booking_request.space
+    link = AvailableDateSpace.get(space.id, available_date.id)
+    link.destroy
+    redirect '/requests'
+  end
+
+  post '/requests/rejection/:booking_id' do
+    BookingRequest.first(id: params[:booking_id]).update(status: 'Rejected')
+    redirect '/requests'
+  end
+
+  #SESSIONS
 
   get '/sessions/new' do
     erb :'sessions/new'
