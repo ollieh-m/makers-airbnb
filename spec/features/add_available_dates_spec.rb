@@ -20,7 +20,7 @@ feature "available dates" do
   scenario "owner can't create duplicates of available dates" do
     visit "/spaces"
     click_link("My spaces")
-    click_link("Manage space")
+    click_link("1")
     fill_in :available_date_start, with: '2016-12-01'
     fill_in :available_date_finish, with: '2016-12-03'
     click_button 'Submit'

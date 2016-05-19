@@ -2,7 +2,7 @@
 	<h2>My spaces</h2>
 		<div class='list-group'>
 			<% current_user.spaces.each do |space| %>
-				<a href='/spaces/mine/<%= space.id %>' class='list-group-item clearfix'> 
+				<a id='<%= space.id %>' href='/spaces/mine/<%= space.id %>' class='list-group-item clearfix'>
 					<span class="pull-left">
        			<span class="glyphicon glyphicon-home"></span>
        		</span>

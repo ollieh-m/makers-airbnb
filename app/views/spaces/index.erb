@@ -11,7 +11,7 @@
 	<h2>Spaces to rent</h2>
 		<div class='list-group'>
 			<% @spaces.each do |space| %>
-				<a href='/spaces/all/<%= space.id %>' class='list-group-item'>
+				<a id='<%= space.id %>' href='/spaces/all/<%= space.id %>' class='list-group-item'>
 					<h4 class='list-group-item-heading'><%= space.title %></h4>
 					<p class='list-group-item-text'>- <%= space.description %></p>
 					<p class ='list-group-item-text'><%= space.location %></p>

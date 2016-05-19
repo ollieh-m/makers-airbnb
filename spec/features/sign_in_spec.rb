@@ -8,6 +8,6 @@ feature 'Sign in' do
 
   scenario 'correctly sign in' do
     sign_in(email: user.email, password: user.password)
-    expect(page).to have_content "#{user.name}"
+    expect(page).to have_content "Example"
   end
 end

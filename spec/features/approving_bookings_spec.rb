@@ -6,8 +6,6 @@ feature "Approving bookings" do
 		add_available_date
 		sign_out
 		sign_up(name: 'Fluff', email: 'fluff@test.com')
-		create_space(title: 'Example 2')
-		add_available_date
 		make_booking_request(space_id: 1)
 		sign_out
 		sign_in
@@ -17,7 +15,6 @@ feature "Approving bookings" do
 		visit '/requests'
 		expect(page).to have_content('Example Title')
 		expect(page).to have_content('2016-12-01')
-		expect(page).not_to have_content('Example 2')
 	end
 
 	scenario "A user can approve a booking request" do
