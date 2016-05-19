@@ -22,6 +22,7 @@ class MakersBnB < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
   end
 
   get '/' do
@@ -39,7 +40,7 @@ class MakersBnB < Sinatra::Base
     current_user.spaces.create(params)
     redirect '/spaces'
   end
-  
+
   get '/spaces/all/:id' do
     @space = Space.get(params[:id])
     erb :'spaces/individual_space'
@@ -62,51 +63,49 @@ class MakersBnB < Sinatra::Base
     if params[:available_date_start] == "" || params[:available_date_finish] == ""
       flash.next[:errors] = ['Please select both start and finish dates']
       redirect "/spaces/mine/#{params[:id]}"
-    else
+    end
 
-      start_day = DateTime.parse(params[:available_date_start])
-      finish_day = DateTime.parse(params[:available_date_finish])
+    start_day = DateTime.parse(params[:available_date_start])
+    finish_day = DateTime.parse(params[:available_date_finish])
 
-      if start_day > finish_day
-        flash.next[:errors] = ['Start date must be before end date']
-        redirect "/spaces/mine/#{params[:id]}"
-      elsif DateTime.now > start_day
-        flash.next[:errors] = ['That ship has sailed']
-        redirect "/spaces/mine/#{params[:id]}"
-      else
+    if start_day > finish_day
+      flash.next[:errors] = ['Start date must be before end date']
+      redirect "/spaces/mine/#{params[:id]}"
+    elsif DateTime.now > start_day
+      flash.next[:errors] = ['That ship has sailed']
+      redirect "/spaces/mine/#{params[:id]}"
+    end
 
-        days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
-        space  = Space.get(params[:id])
+    days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
+    space  = Space.get(params[:id])
 
-        days.each do |available_day|
-          available_date = AvailableDate.first_or_create(date: available_day)
-          unless available_date.spaces.include?(space)
-            available_date.spaces << space
-            available_date.save
-          end
-        end
-        redirect "/spaces/mine/#{params[:id]}"
+    days.each do |available_day|
+      available_date = AvailableDate.first_or_create(date: available_day)
+      unless available_date.spaces.include?(space)
+        available_date.spaces << space
+        available_date.save
       end
     end
+    redirect "/spaces/mine/#{params[:id]}"
   end
+
 
   #USERS
 
   get '/users/new' do
+    @user = User.new
     erb :'users/new'
   end
 
   post '/users' do
-    user = User.create(name: params[:name],
+    @user = User.new(name: params[:name],
     email: params[:email], password: params[:password],
     password_confirmation: params[:password_confirmation])
-    if user.save
-      session[:user_id] = user.id
+    if @user.save
+      session[:user_id] = @user.id
       redirect '/'
     else
-      flash.now[:errors] = user.errors.full_messages
-      @name = params[:name]
-      @email = params[:email]
+      flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'
     end
   end
