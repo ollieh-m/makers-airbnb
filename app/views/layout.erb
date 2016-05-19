@@ -27,22 +27,23 @@
 		<div class='menu'>
     		<ul>
     			<% if current_user %>
-      				<form id="signout" action="/sessions" method="post">
-			  			<input type="hidden" name="_method" value="delete">
-	        			<li><button type="submit" class="btn btn-primary">Sign out</button></li>
-       				</form>
-       				<li><a href='/bookings/received'>Requests received</a></li>
-       			<% else %>
+      				<button id='name'><%= current_user.name %></button>
+	      				<div class='drop-down'>
+		      				<form id="signout" action="/sessions" method="post">
+					  			<input type="hidden" name="_method" value="delete">
+			        			<li><button type="submit" class="btn btn-primary">Sign out</button></li>
+		       				</form>
+		       				<li><a href='/requests'>Requests</a></li>
+		       				<li><a href='/spaces/mine'>Manage spaces></a></li>
+		       				<li><a href='/spaces/new'>Create listing></a></li>
+		       			</div>
+       		<% else %>
        				<li><a href='/users/new'>Sign up</a></li>
        				<li><a href='/sessions/new'>Sign in</a></li>
-				<% end %>
+					<% end %>
 				<li><a href='/spaces'>Spaces</a></li>
 			</ul>
 		</div>
-
-		<% if current_user %>
-			<h1 style="text-align: center;">Welcome, <%= current_user.name %></h1>
-		<% end %>
 
 		<%= yield %>
 
