@@ -32,4 +32,15 @@ get '/spaces/mine/:id' do
   erb :'spaces/my_individual_space'
 end
 
+post '/spaces/mine/:id/available_date' do
+  validate_date_not_empty(params[:available_date_start],params[:available_date_finish])
+  start_day = DateTime.parse(params[:available_date_start])
+  finish_day = DateTime.parse(params[:available_date_finish])
+  validate_date_time(start_day,finish_day)
+  days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
+  space  = Space.get(params[:id])
+  add_available_days(days,space)
+  redirect "/spaces/mine/#{params[:id]}"
+end
+
 end
