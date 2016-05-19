@@ -14,14 +14,14 @@ feature "Approving bookings" do
 	end
 
 	scenario "A user can see a list of the booking requests on the spaces they own" do
-		visit '/bookings/received'
+		visit '/requests'
 		expect(page).to have_content('Example Title')
 		expect(page).to have_content('2016-12-01')
 		expect(page).not_to have_content('Example 2')
 	end
 
 	scenario "A user can approve a booking request" do
-		visit '/bookings/received'
+		visit '/requests'
 		within '#1' do
 			expect(page).to have_button('Confirm')
 		end
@@ -37,14 +37,14 @@ feature "Approving bookings" do
 
 	scenario "after booking confirmed, date is not available" do
 		space = Space.get(1)
-		visit 'bookings/received'
+		visit '/requests'
 		expect { click_button "Confirm" }.to change { space.available_dates.count }.by(-1)
 	end
 
 	scenario "removes date from available dates" do
 		space = Space.get(1)
 		available_date = space.available_dates.first
-		visit 'bookings/received'
+		visit '/requests'
 		click_button "Confirm"
 		space.reload
 		expect(space.available_dates).not_to include available_date

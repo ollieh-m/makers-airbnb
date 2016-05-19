@@ -25,11 +25,7 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/' do
-    if current_user
-      redirect '/spaces'
-    else
-      erb :'users/new'
-    end
+    redirect '/spaces'
   end
 
   get '/spaces' do
@@ -112,9 +108,9 @@ class MakersBnB < Sinatra::Base
   end
   #ideally we want to validate in the models but boy did shit hit the fan when we attempted that
 
-  get '/bookings/received' do
+  get '/requests' do
     @spaces = current_user.spaces
-    erb :'bookings/received'
+    erb :'requests'
   end
 
   post '/bookings/confirmation/:booking_id' do
@@ -124,12 +120,12 @@ class MakersBnB < Sinatra::Base
     space = booking_request.space
     link = AvailableDateSpace.get(space.id, available_date.id)
     link.destroy
-    redirect 'bookings/received'
+    redirect '/requests'
   end
 
   post '/bookings/rejection/:booking_id' do
     BookingRequest.first(id: params[:booking_id]).update(status: 'Rejected')
-    redirect 'bookings/received'
+    redirect '/requests'
   end
 
   post '/users' do

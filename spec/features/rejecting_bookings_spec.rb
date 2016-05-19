@@ -18,7 +18,7 @@ feature "Rejecting bookings" do
 	end
 
 	scenario "A user can reject a booking request" do
-		visit '/bookings/received'
+		visit '/requests'
 		within '#1' do
 			expect(page).to have_button('Reject')
 		end
