@@ -1,14 +1,29 @@
-<h1>Set available date</h1>
+<div class='row'>
+	<div class='col-md-12'>
 
-<form action='/spaces/mine/<%= @space.id %>/available_date', method='post'>
-	Choose a starting date <input type="date" name="available_date_start">
-	Choose a finishing date <input type="date" name="available_date_finish">
-	<input type="submit" value="Submit">
-</form>
+	<h1>Set available date</h1>
+	<form role='form' action='/spaces/mine/<%= @space.id %>/available_date' method='post'>
+		<div class='form-group'>
+			Choose a starting date <input type="date" name="available_date_start">
+		</div>
+		<div class='form-group'>
+			Choose a finishing date <input type="date" name="available_date_finish">
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
 
-<h1>Current available dates</h1>
-<% @space.available_dates.each do |available_date| %>
-	<div class ='space'>
-		<P class ='date'><%= available_date.date.strftime("%d-%b-%Y") %></p>
 	</div>
-<% end %>
+</div>
+
+<div class='row'>
+	<div class='col-md-12'>
+	
+	<h2>Current available dates</h2>
+	<ul class='list-group'>
+		<% @space.available_dates.each do |available_date| %>
+			<li class="list-group-item"><%= available_date.date.strftime("%d-%b-%Y") %></li>
+		<% end %>
+	</ul>
+
+	</div>
+</div>

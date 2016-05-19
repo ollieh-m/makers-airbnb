@@ -8,44 +8,18 @@
 
 	<body>
 
-		<h1>Makers AirBnB</h1>
-			<% if flash[:errors] && !flash[:errors].empty? %>
-    			<div id="flash" class="alert alert-danger">
-        			<ul id="error" >
-            			<% flash[:errors].each do |error| %>
-            				<li><%= error %></li>
-            			<% end %>
-           			</ul>
-        		</div>
-    		<% end %>
-		<% if flash[:notice] %>
-    		<div id="notice" class="alert alert-success">
-        		<%= flash[:notice] %>
-    		</div>
-		<% end %>
-    	
-		<div class='menu'>
-    		<ul>
-    			<% if current_user %>
-      				<button id='name'><%= current_user.name %></button>
-	      				<div class='drop-down'>
-		      				<form id="signout" action="/sessions" method="post">
-					  			<input type="hidden" name="_method" value="delete">
-			        			<li><button type="submit" class="btn btn-primary">Sign out</button></li>
-		       				</form>
-		       				<li><a href='/requests'>Requests</a></li>
-		       				<li><a href='/spaces/mine'>Manage spaces></a></li>
-		       				<li><a href='/spaces/new'>Create listing></a></li>
-		       			</div>
-       		<% else %>
-       				<li><a href='/users/new'>Sign up</a></li>
-       				<li><a href='/sessions/new'>Sign in</a></li>
-					<% end %>
-				<li><a href='/spaces'>Spaces</a></li>
-			</ul>
-		</div>
+		<%= partial :flash %>
+		<%= partial :navbar %>
 
-		<%= yield %>
+		<div class="container">
+			<%= yield %>
+		</div>
+		<script src='/jquery.js'></script>
+
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="/custom.css">
 
 	</body>
 </html>
