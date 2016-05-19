@@ -70,7 +70,7 @@ end
 
 def fill_in_create_space_form
   visit '/spaces'
-  click_link 'Create space'
+  click_link 'Create a new space'
   fill_in('title', with: 'Example title')
   fill_in('location', with: 'Example location')
   fill_in('description', with: 'Example description')
@@ -79,7 +79,7 @@ end
 
 def create_space(title: 'Example Title', location: 'Example location', description: 'Example description', price: '20')
   visit '/spaces'
-  click_link 'Create space'
+  click_link 'Create a new space'
   fill_in('title', with: title)
   fill_in('location', with: location)
   fill_in('description', with: description)
@@ -89,7 +89,7 @@ end
 
 def create_wrong_space
   visit '/spaces'
-  click_link 'Create space'
+  click_link 'Create a new space'
   fill_in('title', with: 'Fail title')
   fill_in('location', with: 'Fail location')
   fill_in('description', with: 'Fail description')
