@@ -133,14 +133,15 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/requests/:space_id' do
-    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.get(params[:space_id]))
-    if space_available?(req)
+    request = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.get(params[:space_id]))
+    # if space_available?(request)
+    if request.space_unavailable?
       flash.next[:errors] = ['The space is not available on that date']
       redirect "/spaces/all/#{params[:space_id]}"
-    elsif (req.user.email == req.space.user.email)
+    elsif (request.user.email == request.space.user.email)
       flash.next[:errors] = ['You cannot book your own space']
     else
-      req.save
+      request.save
     end
     redirect '/'
   end
