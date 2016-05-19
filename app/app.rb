@@ -40,6 +40,17 @@ class MakersBnB < Sinatra::Base
       end
     end
 
+    def remove_confirmed_date(request)
+      available_date = AvailableDate.first(date: request.date)
+      space = request.space
+      link = AvailableDateSpace.get(space.id, available_date.id)
+      link.destroy
+    end
+
+    def space_available?(request)
+      !request.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == request.date.strftime("%m/%d/%Y")}
+    end
+
   end
 
   get '/' do
@@ -119,28 +130,22 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/requests/:space_id' do
-    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.first(id: params[:space_id]))
-    boolean = !req.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y")  == req.date.strftime("%m/%d/%Y")}
-
-    if boolean
+    req = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.get(params[:space_id]))
+    if space_available?(req)
       flash.next[:errors] = ['The space is not available on that date']
       redirect "/spaces/all/#{params[:space_id]}"
     elsif (req.user.email == req.space.user.email)
       flash.next[:errors] = ['You cannot book your own space']
-      redirect '/'
     else
       req.save
-      redirect '/'
     end
+    redirect '/'
   end
 
   post '/requests/confirmation/:booking_id' do
-    BookingRequest.first(id: params[:booking_id]).update(status:'Confirmed')
-    booking_request = BookingRequest.first(id: params[:booking_id])
-    available_date = AvailableDate.first(date: booking_request.date)
-    space = booking_request.space
-    link = AvailableDateSpace.get(space.id, available_date.id)
-    link.destroy
+    booking_request = BookingRequest.get(params[:booking_id])
+    booking_request.update(status: 'Confirmed')
+    remove_confirmed_date(booking_request)
     redirect '/requests'
   end
 
