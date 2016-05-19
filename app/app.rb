@@ -30,7 +30,7 @@ class MakersBnB < Sinatra::Base
       end
     end
 
-    def validate_date(start,finish)
+    def validate_date_time(start,finish)
       if start > finish
         flash.next[:errors] = ['Start date must be before end date']
         redirect "/spaces/mine/#{params[:id]}"
@@ -80,17 +80,12 @@ class MakersBnB < Sinatra::Base
     validate_date_not_empty(params[:available_date_start],params[:available_date_finish])
     start_day = DateTime.parse(params[:available_date_start])
     finish_day = DateTime.parse(params[:available_date_finish])
-    validate_date(start_day,finish_day)
-
+    validate_date_time(start_day,finish_day)
     days = (start_day..finish_day).group_by(&:day).map { |_,day| day }
     space  = Space.get(params[:id])
-
     days.each do |available_day|
       available_date = AvailableDate.first_or_create(date: available_day)
-      unless available_date.spaces.include?(space)
-        available_date.spaces << space
-        available_date.save
-      end
+      AvailableDateSpace.first_or_create(available_date: available_date, space: space)
     end
     redirect "/spaces/mine/#{params[:id]}"
   end
