@@ -1,21 +1,21 @@
 <div class="row">
-	<div class="col-md-6">
-		<a href="/spaces/mine">My spaces</a>
+	<div class="col-md-12">
+		<h2>Spaces to rent</h2>
 	</div>
-	<div class="col-md-6">
-		<a href="/spaces/new">create a new space</a>
+	<% if current_user %>
+	<div class="col-md-12">
+		<p>| <a href="/spaces/mine">My spaces</a> | <a href="/spaces/new">Create a new space</a> |</P>
 	</div>
-</div>
-
-<div class="row">
-	<h2>Spaces to rent</h2>
+	<% end %>
+	<div class="col-md-12">
 		<div class='list-group'>
 			<% @spaces.each do |space| %>
-				<a id='<%= space.id %>' href='/spaces/all/<%= space.id %>' class='list-group-item'>
-					<h4 class='list-group-item-heading'><%= space.title %></h4>
-					<p class='list-group-item-text'>- <%= space.description %></p>
-					<p class ='list-group-item-text'><%= space.location %></p>
-				</a>
+			<a id='<%= space.id %>' href='/spaces/all/<%= space.id %>' class='list-group-item'>
+				<h4 class='list-group-item-heading'><%= space.title %></h4>
+				<p class='list-group-item-text'>- <%= space.description %></p>
+				<p class ='list-group-item-text'><%= space.location %></p>
+			</a>
 			<% end %>
 		</div>
+	</div>
 </div>

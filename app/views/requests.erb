@@ -1,30 +1,45 @@
-<div> 
-  <% @spaces.each do |space| %>
-    	<% unless space.booking_requests.empty? %>
-    		<p><%= space.title %>, <%= space.location %></p>
-    		<% space.booking_requests.each do |booking_request| %>
-          <article id='<%= booking_request.id %>' >
-    			 <%= booking_request.user.name %>
-    			 <%= booking_request.formatted_date %>
-           <%= booking_request.status %>
-            <% if booking_request.status == 'Pending' %>
-              <form action='/requests/confirmation/<%= booking_request.id%>' method='post'>
-                <input type='submit' value='Confirm'>
-              </form>
-              <form action='/requests/rejection/<%= booking_request.id%>' method='post'>
-                <input type='submit' value='Reject'>
-              </form>
-            <% end %>
-          </article>
-    		<% end %>
-    	<% end %>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Request for my spaces</h2>
+    <% @spaces.each do |space| %>
+    <ul class='list-group'
+    <% unless space.booking_requests.empty? %>
+    <p>Space:     <%= space.title %></p>
+    <p>Location:  <%= space.location %></p>
+    <% space.booking_requests.each do |booking_request| %>
+
+
+    <li class="list-group-item clearfix">
+      <p>Requested by: <%= booking_request.user.name %></p>
+      <p>Requested on: <%= booking_request.formatted_date %></p>
+      <p>Request status: <%= booking_request.status %></p>
+      <% if booking_request.status == 'Pending' %>
+      <span class="pull-right">
+        <form action='/requests/confirmation/<%= booking_request.id%>' method='post'>
+          <input type='submit' class="btn btn-default" value='Confirm'>
+        </form>
+        <form action='/requests/rejection/<%= booking_request.id%>' method='post'>
+          <input type='submit' class="btn btn-default" value='Reject'>
+        </form>
+      </span>
+      <% end %>
+    </li>
+  </ul>
   <% end %>
+  <% end %>
+  <% end %>
+
 </div>
 
-<div>
-  <% @booking_requests.each do |request| %>
-    <%= request.space.title %>
-    <%= request.status %>
-    <%= request.formatted_date %>
-  <% end %>
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>My requests for other space</h2>
+    <ul class='list-group'>
+      <% @booking_requests.each do |request| %>
+      <li class="list-group-item"> <P>Space: <%= request.space.title %></P>  <P>Status: <%= request.status %></P>  <P>Date: <%= request.formatted_date %></P> </li>
+      <% end %>
+    </div>
+
+  </div>
 </div>
