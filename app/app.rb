@@ -129,6 +129,7 @@ class MakersBnB < Sinatra::Base
 
   get '/requests' do
     @spaces = current_user.spaces
+    @booking_requests = current_user.booking_requests
     erb :'requests'
   end
 
