@@ -1,20 +1,30 @@
-<% @spaces.each do |space| %>
-  	<% unless space.booking_requests.empty? %>
-  		<p><%= space.title %>, <%= space.location %></p>
-  		<% space.booking_requests.each do |booking_request| %>
-        <article id='<%= booking_request.id %>' >
-  			 <%= booking_request.user.name %>
-  			 <%= booking_request.formatted_date %>
-         <%= booking_request.status %>
-          <% if booking_request.status == 'Pending' %>
-            <form action='/requests/confirmation/<%= booking_request.id%>' method='post'>
-              <input type='submit' value='Confirm'>
-            </form>
-            <form action='/requests/rejection/<%= booking_request.id%>' method='post'>
-              <input type='submit' value='Reject'>
-            </form>
-          <% end %>
-        </article>
-  		<% end %>
-  	<% end %>
-<% end %>
+<div> 
+  <% @spaces.each do |space| %>
+    	<% unless space.booking_requests.empty? %>
+    		<p><%= space.title %>, <%= space.location %></p>
+    		<% space.booking_requests.each do |booking_request| %>
+          <article id='<%= booking_request.id %>' >
+    			 <%= booking_request.user.name %>
+    			 <%= booking_request.formatted_date %>
+           <%= booking_request.status %>
+            <% if booking_request.status == 'Pending' %>
+              <form action='/requests/confirmation/<%= booking_request.id%>' method='post'>
+                <input type='submit' value='Confirm'>
+              </form>
+              <form action='/requests/rejection/<%= booking_request.id%>' method='post'>
+                <input type='submit' value='Reject'>
+              </form>
+            <% end %>
+          </article>
+    		<% end %>
+    	<% end %>
+  <% end %>
+</div>
+
+<div>
+  <% @booking_requests.each do |request| %>
+    <%= request.space.title %>
+    <%= request.status %>
+    <%= request.formatted_date %>
+  <% end %>
+</div>
