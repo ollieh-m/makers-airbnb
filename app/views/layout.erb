@@ -2,24 +2,39 @@
 
 <html>
 
-	<head>
-		<title>Makers AirBnB</title>
-	</head>
+<head>
+	<title>Makers AirBnB</title>
+</head>
 
-	<body>
+<body>
 
-		<%= partial :flash %>
-		<%= partial :navbar %>
 
-		<div class="container">
-			<%= yield %>
+	<%= partial :navbar %>
+	<%= partial :flash %>
+
+	<div class="container">
+		<div class="row">
+			<div class='col-md-12'>
+				<% if current_user %>
+				<span class="pull-right">Hello, <%= current_user.name %>
+				</br>
+				<form class="navbar-brand pull-right" id="signout" action="/sessions" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<button type="submit" class="btn btn-sm">Sign out</button>
+				</form></span>
+
+				<% end %>
+			</div>
 		</div>
-		<script src='/jquery.js'></script>
 
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+		<%= yield %>
+	</div>
+	<script src='/jquery.js'></script>
 
-		<link rel="stylesheet" href="/custom.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
-	</body>
+	<link rel="stylesheet" href="/custom.css">
+
+</body>
 </html>
