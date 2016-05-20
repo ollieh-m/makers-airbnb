@@ -38,6 +38,30 @@
         null,
         null
       ],
+      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/bookingrequest_spec.rb": [
+        1,
+        null,
+        3,
+        null,
+        null,
+        null,
+        3,
+        null,
+        null,
+        null,
+        null,
+        3,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/add_available_dates_spec.rb": [
         1,
         null,
@@ -385,6 +409,6 @@
         null
       ]
     },
-    "timestamp": 1463743712
+    "timestamp": 1463744807
   }
 }
