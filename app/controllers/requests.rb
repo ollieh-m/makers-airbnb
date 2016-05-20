@@ -7,6 +7,10 @@ get '/requests' do
 end
 
 post '/requests/:space_id' do
+  if params[:date].empty?
+    flash.next[:errors] = ['Please select date']
+    redirect "/spaces/all/#{params[:space_id]}"
+  end
   request = BookingRequest.new(date: DateTime.parse(params[:date]),  user: current_user, space: Space.get(params[:space_id]))
   if request.space_unavailable?
     flash.next[:errors] = ['The space is not available on that date']
