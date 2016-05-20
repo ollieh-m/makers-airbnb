@@ -21,4 +21,12 @@ feature "a user can make a booking request" do
     expect(page).to have_content('You cannot book your own space')
   end
 
+  scenario "user gets error message if they dont select a date when making a booking request" do
+    visit "/spaces"
+    click_link("1")
+    click_button 'Submit Booking'
+    expect(page).to have_content('Please select date')
+  end
+
+
 end
