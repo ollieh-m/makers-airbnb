@@ -1,7 +1,9 @@
-
+[![Coverage Status](https://coveralls.io/repos/github/ollieh-m/makers-airbnb/badge.svg?branch=master)](https://coveralls.io/github/ollieh-m/makers-airbnb?branch=master)
 # MakersBnB
 Live like you were dying, party like someone else had to clean it up. 
 No, seriously, someone else has to clean it up.  --MakersBnB
+
+##Photos of the application
 
 ## Heroku deployment
 [makersbnb123](http://makersbnb123.herokuapp.com/spaces)
@@ -21,3 +23,10 @@ Chris K, Lexi, Letian, Ollie
 9. Embrace the chaos that is renting your own place to strangers.
 
 ## Features
+1. Any signed-up user can list a new space.
+2. Users can list multiple spaces.
+3. Users are able to name their space, provide a short description of the space, and a price per night.
+4. Users are to offer a range of dates where their space is available through a calendar
+5. Any signed-up user can request to hire any space for one night, and this can be approved or denied by the user that owns that space.
+6. Nights for which a space has already been booked are notavailable for users to book that space.
+7. Until a user has confirmed a booking request, that space can still be booked for that night.
