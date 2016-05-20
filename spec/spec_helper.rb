@@ -5,8 +5,10 @@ require File.join(File.dirname(__FILE__), '..', './app/app.rb')
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-require 'features/web_helper'
 require 'database_cleaner'
+require_relative './helpers/session'
+require_relative './helpers/space'
+require_relative './helpers/request'
 require 'coveralls'
 require 'simplecov'
 
@@ -58,6 +60,11 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  config.include SessionHelpers
+  config.include SpaceHelpers
+  config.include RequestHelpers
+  #include the sessionhelper module
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
