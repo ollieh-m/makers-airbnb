@@ -9,7 +9,8 @@ class MakersBnB < Sinatra::Base
         badge: true,
         title: "Available",
         body: "Click here to request a booking on this date",
-        footer: "<button id='make-request'>Make request</button>",
+        footer: "<form action='/requests/#{space.id}', method='post'>
+        				<button type='submit' name='date' value='#{available_date.date.strftime('%Y-%m-%d')}'>Make request</button>",
         classname: "available-date"
       }
       array.push(hash)

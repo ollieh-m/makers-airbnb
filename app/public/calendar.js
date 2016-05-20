@@ -16,4 +16,8 @@ $(document).ready(function () {
     	}
     });
 
+    $("#make-request").click(function(){
+        $("#make-request").hide();
+    });
+
 });
