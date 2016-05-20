@@ -16,8 +16,12 @@ $(document).ready(function () {
     	}
     });
 
-    $("#make-request").click(function(){
-        $("#make-request").hide();
+    $("#my-spaces-calendar").zabuto_calendar({
+        language: "en",
+        ajax: {
+            url: 'http://' + host() + '/my_available_dates/' + space(),
+            modal: false
+        }
     });
 
 });
