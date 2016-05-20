@@ -8,6 +8,7 @@ require 'rspec'
 require 'features/web_helper'
 require 'database_cleaner'
 require 'coveralls'
+require 'simplecov'
 
 SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
