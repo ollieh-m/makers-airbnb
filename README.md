@@ -4,6 +4,14 @@ Live like you were dying, party like someone else had to clean it up.
 No, seriously, someone else has to clean it up.  --MakersBnB
 
 ##Photos of the application
+![alt tag](http://i.imgur.com/0xeHqma.png)
+Main page
+![alt tag](http://i.imgur.com/BmNlSio.png)
+User page
+![alt tag](http://i.imgur.com/y69d171.png)
+Request page
+![alt tag](http://i.imgur.com/D7quca0.png)
+Calendar
 
 ## Heroku deployment
 [makersbnb123](http://makersbnb123.herokuapp.com/spaces)
