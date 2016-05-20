@@ -16,4 +16,5 @@ group :test do
 	gem 'rspec'
 	gem 'byebug'
  	gem 'database_cleaner'
+ 	gem 'coveralls', require: false
 end
