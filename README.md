@@ -1,6 +1,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/ollieh-m/makers-airbnb/badge.svg?branch=master)](https://coveralls.io/github/ollieh-m/makers-airbnb?branch=master)
 # MakersBnB
 Live like you were dying, party like someone else had to clean it up. 
+
 No, seriously, someone else has to clean it up.  --MakersBnB
 
 ##Photos of the application
@@ -15,7 +16,7 @@ No, seriously, someone else has to clean it up.  --MakersBnB
 
 
 ## Heroku deployment
-[makersbnb123](http://makersbnb123.herokuapp.com/spaces)
+[makersbnb123](http://makersbnb123.herokuapp.com)
 
 ## Collaborators
 Chris K, Lexi, Letian, Ollie
