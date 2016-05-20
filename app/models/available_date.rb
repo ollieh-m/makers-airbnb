@@ -20,7 +20,7 @@ class AvailableDate
   def self.days_to_array(start,finish)
   	start_day = DateTime.parse(start)
     finish_day = DateTime.parse(finish)
-    (start_day..finish_day).group_by(&:day).map{ |_,day| day }
+    (start_day..finish_day).group_by(&:day).map{ |_,day| day[0] }
   end
   
 end
