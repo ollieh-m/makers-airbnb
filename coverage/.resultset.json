@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/add_available_dates_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/add_available_dates_spec.rb": [
         1,
         null,
         1,
@@ -37,7 +37,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/approving_bookings_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/approving_bookings_spec.rb": [
         1,
         null,
         1,
@@ -90,7 +90,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/cannot_book_unavailable_date_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/cannot_book_unavailable_date_spec.rb": [
         1,
         null,
         1,
@@ -110,7 +110,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/make_booking_request_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/make_booking_request_spec.rb": [
         1,
         null,
         1,
@@ -136,7 +136,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/only_logged_in_users_can_post_spaces_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/only_logged_in_users_can_post_spaces_spec.rb": [
         1,
         null,
         1,
@@ -160,7 +160,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/rejecting_bookings_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/rejecting_bookings_spec.rb": [
         1,
         null,
         1,
@@ -192,7 +192,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/renter_see_available_dates_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/renter_see_available_dates_spec.rb": [
         1,
         null,
         1,
@@ -210,7 +210,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/show_user_requests_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/show_user_requests_spec.rb": [
         1,
         null,
         1,
@@ -230,7 +230,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/sign_in_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/sign_in_spec.rb": [
         1,
         1,
         1,
@@ -245,7 +245,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/sign_out_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/sign_out_spec.rb": [
         1,
         1,
         1,
@@ -261,7 +261,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/sign_up_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/sign_up_spec.rb": [
         1,
         null,
         1,
@@ -302,7 +302,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/viewing_individual_spaces_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/viewing_individual_spaces_spec.rb": [
         1,
         null,
         1,
@@ -317,7 +317,7 @@
         null,
         null
       ],
-      "/Users/olliehaydon-mulligan/Documents/Coding/week6/makers-airbnb/spec/features/viewing_listing_spec.rb": [
+      "/Users/Fluff/projects/makersAcademy/Makers_BnB/fluff/makers-airbnb/spec/features/viewing_listing_spec.rb": [
         1,
         null,
         1,
@@ -340,6 +340,6 @@
         null
       ]
     },
-    "timestamp": 1463734304
+    "timestamp": 1463737827
   }
 }

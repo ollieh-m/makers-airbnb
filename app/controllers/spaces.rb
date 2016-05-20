@@ -1,12 +1,13 @@
 class MakersBnB < Sinatra::Base
 
 get '/' do
-  redirect '/spaces'
+  @spaces = Space.all
+  erb :'spaces/index'
 end
 
 get '/spaces' do
   @spaces = Space.all
-  erb :'spaces/index'
+  erb :'spaces/all'
 end
 
 post '/spaces' do
@@ -39,7 +40,7 @@ post '/spaces/mine/:id/available_date' do
     space = Space.get(params[:id])
     add_available_days(days_array,space)
   else
-    flash.next[:errors] = validation 
+    flash.next[:errors] = validation
   end
   redirect "/spaces/mine/#{params[:id]}"
 end
