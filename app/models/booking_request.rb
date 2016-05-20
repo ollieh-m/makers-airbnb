@@ -14,11 +14,11 @@ class BookingRequest
 	end
 
   def space_unavailable?
-    !self.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == self.date.strftime("%m/%d/%Y")}
+    !self.space.available_dates.any?{|a_date|a_date.date == self.date}
   end
 
   def self_booking?
-    self.user.email == self.space.user.email
+    self.user == self.space.user
   end
 
 end
