@@ -14,7 +14,7 @@ class BookingRequest
 	end
 
   def space_unavailable?
-    !self.space.available_dates.any?{|a_date|a_date.date == self.date}
+    !self.space.available_dates.find_index {|a_date|a_date.date.strftime("%m/%d/%Y") == self.date.strftime("%m/%d/%Y")}
   end
 
   def self_booking?
