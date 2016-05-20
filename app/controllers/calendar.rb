@@ -1,6 +1,7 @@
 class MakersBnB < Sinatra::Base
 
 	get '/available_dates/:id' do
+    headers 'Access-Control-Allow-Origin' => '*'
     space = Space.get(params[:id])
     array = []
     space.available_dates.each do |available_date|

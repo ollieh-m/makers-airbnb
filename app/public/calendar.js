@@ -4,10 +4,14 @@ $(document).ready(function () {
 			return window.location.pathname.match(/\d+/)
 		};
 
+        function host() {
+            return window.location.host
+        }
+
     $("#my-calendar").zabuto_calendar({
     	language: "en",
     	ajax: {
-    		url: 'http://localhost:9292/available_dates/' + space(),
+    		url: 'http://' + host() + '/available_dates/' + space(),
     		modal: true
     	}
     });
