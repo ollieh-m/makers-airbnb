@@ -38,5 +38,7 @@ Chris K, Lexi, Letian, Ollie
 3. Users are able to name their space, provide a short description of the space, and a price per night.
 4. Users are to offer a range of dates where their space is available through a calendar
 5. Any signed-up user can request to hire any space for one night, and this can be approved or denied by the user that owns that space.
-6. Nights for which a space has already been booked are notavailable for users to book that space.
+6. Nights for which a space has already been booked are not available for users to book that space.
 7. Until a user has confirmed a booking request, that space can still be booked for that night.
+8. A user cannot book his own place (even if we take 6% commisson regardless).
+
